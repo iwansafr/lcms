@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,32 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
+Route::middleware('auth')->group(function () {
+	Route::prefix('/dashboard')->group(function () {
+		Route::get('/', function () {
+			return view('dashboard.dashboard');
+		})->name('dashboard');
+		Route::get('/user', function () {
+			return view('dashboard.user.index');
+		})->middleware('role:admin');
+		Route::get('/role', function () {
+			return view('dashboard.role.index');
+		})->middleware('role:root');
+		Route::get('/kelas', function () {
+			return view('dashboard.kelas.index');
+		});
+		Route::get('/guru', function () {
+			return view('dashboard.guru.index');
+		});
+		Route::get('guru/template', [GuruController::class, 'template']);
+		Route::get('pengguna', function () {
+			return view('dashboard.pengguna.index');
+		});
+	});
+});
+
 
 Auth::routes();
 
