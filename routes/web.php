@@ -26,7 +26,7 @@ Route::middleware('auth')->group(function () {
 			return view('dashboard.user.index');
 		})->middleware('role:admin');
 		Route::get('/role', function () {
-			return view('dashboard.role.index');
+			return view('dashboard.user.role');
 		})->middleware('role:root');
 		Route::get('/kelas', function () {
 			return view('dashboard.kelas.index');

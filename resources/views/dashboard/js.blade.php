@@ -5,4 +5,5 @@
 <script src="/AdminLte/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/AdminLte/dist/js/demo.js"></script>
+<script src="{{asset('js/script.js')}}"></script>
 @stack('js')
